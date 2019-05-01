@@ -6,10 +6,14 @@ import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css';
 import VueResource from 'vue-resource'
+import VueLazy from 'vue-lazyload'
 
 Vue.config.productionTip = false
 Vue.use(iView)
 Vue.use(VueResource)
+Vue.use(VueLazy, {
+  loading: "/static/loading-svg/loading-bars.svg"
+})
 
 /* eslint-disable no-new */
 new Vue({
