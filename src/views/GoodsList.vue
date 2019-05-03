@@ -9,7 +9,7 @@
         <div class="filter-nav">
           <span class="sortby">Sort by:</span>
           <a href="javascript:void(0)" class="default cur">Default</a>
-          <a href="javascript:void(0)" class="price">Price
+          <a href="javascript:void(0)" class="price" @click="sortPrice">Price
             <svg class="icon icon-arrow-short">
               <use xlink:href="#icon-arrow-short"></use>
             </svg>
@@ -36,17 +36,27 @@
               <ul>
                 <li v-for="(item, index) in goodsList" :key="index">
                   <div class="pic">
-                    <a href="#"><img v-lazy="'/static/' + item.productImg" alt=""></a>
+                    <a href="#">
+                      <!--<img v-lazy="getImagePath(item.productImage)" alt="">-->
+                      <img :src="getImagePath(item.productImage)" v-lazy="getImagePath(item.productImage)" alt="">
+                    </a>
                   </div>
                   <div class="main">
                     <div class="name">{{item.productName}}</div>
-                    <div class="price">{{item.productPrice}}</div>
+                    <div class="price">{{item.salePrice}}</div>
                     <div class="btn-area">
-                      <a href="javascript:;" class="btn btn--m">加入购物车</a>
+                      <a href="javascript:;" class="btn btn--m" @click="addCart(item.productId)">加入购物车</a>
                     </div>
                   </div>
                 </li>
               </ul>
+
+              <div v-infinite-scroll="loadMore" class="load-more" infinite-scroll-disabled="busy"
+                   infinite-scroll-distance="30" style="text-align: center;">
+                <!--<span v-text="loadingText"></span>-->
+                <img src="./../../static/loading-svg/loading-bubbles.svg" v-if="loadingImage"/>
+              </div>
+
             </div>
           </div>
         </div>
@@ -65,7 +75,7 @@
   import NavHeader from '../components/NavHeader'
   import NavFooter from './../components/NavFooter'
   import NavBread from './../components/NavBread'
-  import {getGoodsList} from "../../api/goods";
+  import {addCart, getGoodsList} from "../../api/goods";
 
   export default {
     name: "GoodsList",
@@ -93,16 +103,40 @@
         ],
         priceChecked: 'all',
         filterBy: false,
-        overLayFlag: false
+        overLayFlag: false,
+        sort: 1,
+        pageSize: 8,
+        loadingImage: true,
+        busy: true,
+        page: 1
       }
     },
     methods: {
       init() {
-        this.getGoodsList()
+        this.getGoodsList(false)
       },
-      getGoodsList() {
-        getGoodsList().then(res => {
-          this.goodsList = res.data.result
+      getGoodsList(flag) {
+        getGoodsList({
+          page: this.page,
+          pageSize: this.pageSize,
+          sort: this.sort,
+          priceLevel: this.priceChecked
+        }).then(res => {
+
+          if (flag) {
+            this.goodsList = this.goodsList.concat(res.data.result.list)
+            if (res.data.result.count === 0) {
+              this.loadingImage = false
+              this.busy = true
+            } else {
+              this.busy = false
+            }
+          } else {
+            this.goodsList = res.data.result.list
+            this.busy = false
+            this.loadingImage = true
+            console.log("busy false")
+          }
         })
       },
       showFilterPop() {
@@ -115,8 +149,38 @@
       },
       setPriceFilter(index) {
         this.priceChecked = index
+        this.page = 1
         this.closePop()
+      },
+      sortPrice() {
+        this.busy = true
+        this.page = 1
+        this.sort === -1 ? this.sort = 1 : this.sort = -1
+      },
+      getImagePath(src) {
+        return "/static/" + src
+      },
+      loadMore() {
+        this.busy = true
+
+        setTimeout(() => {
+          this.page++
+          this.getGoodsList(true)
+        }, 1000)
+      },
+      addCart(productId) {
+        addCart({
+          productId: productId
+        }).then(res => {
+          if (res.data.status === 0){
+            console.log('添加成功')
+          }
+        })
       }
+    },
+    watch: {
+      'sort': 'init',
+      'priceChecked': 'init'
     },
     mounted() {
       this.init()

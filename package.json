@@ -19,8 +19,12 @@
     "iview": "^3.4.1",
     "iview3": "^3.2.2",
     "jade": "~1.11.0",
+    "lazy-load-img": "^3.0.8",
+    "mongoose": "^5.5.5",
     "morgan": "~1.9.0",
     "vue": "^2.5.2",
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-lazy-load-img": "0.0.5",
     "vue-lazyload": "^1.2.6",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"

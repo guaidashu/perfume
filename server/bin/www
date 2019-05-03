@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+// connect mongodb
+let mongoose = require("../service/createMongodbConnection");
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');

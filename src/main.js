@@ -7,6 +7,7 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css';
 import VueResource from 'vue-resource'
 import VueLazy from 'vue-lazyload'
+import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.config.productionTip = false
 Vue.use(iView)
@@ -14,6 +15,7 @@ Vue.use(VueResource)
 Vue.use(VueLazy, {
   loading: "/static/loading-svg/loading-bars.svg"
 })
+Vue.use(infiniteScroll)
 
 /* eslint-disable no-new */
 new Vue({
