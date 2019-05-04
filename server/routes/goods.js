@@ -6,7 +6,7 @@ var router = express.Router();
 
 
 // 获取商品列表
-router.get('/', function (req, res, next) {
+router.get('/list', function (req, res, next) {
   GoodsController.getGoodsList(req, res)
 });
 

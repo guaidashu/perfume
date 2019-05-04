@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 export const getGoodsList = (params) => {
-  return axios.request({url: "/goods", method: 'get', params: params})
+    return axios.request({url: "/goods/list", method: 'get', params: params})
 }
 
 export const addCart = (post) => {
-  return axios.request({url: '/goods/addCart', method: 'post', data: post})
+    return axios.request({url: '/goods/addCart', method: 'post', data: post})
 }
