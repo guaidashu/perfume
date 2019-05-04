@@ -57,7 +57,7 @@ let GoodsController = {
 
   // 加入到购物车
   addCart(req, res) {
-    let userId = '100000077', productId = req.body.productId;
+    let userId = req.cookies.userId, productId = req.body.productId;
     User.findOne({
       userId: userId
     }, (err, userDoc) => {

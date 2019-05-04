@@ -10,8 +10,8 @@
                     <span class="sortby">Sort by:</span>
                     <a href="javascript:void(0)" class="default cur">Default</a>
                     <a href="javascript:void(0)" class="price" @click="sortPrice">Price
-                        <svg class="icon icon-arrow-short">
-                            <use xlink:href="#icon-arrow-short"></use>
+                        <svg class="icon icon-arrow-short" :class="{'sort-up': sort===1}">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-short"></use>
                         </svg>
                     </a>
                     <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
@@ -66,6 +66,25 @@
         </div>
         <div class="md-overlay" v-show="overLayFlag" @click="closePop"></div>
         <nav-footer></nav-footer>
+        <modal :md-show="mdShow" @close="closeModal">
+            <p slot="message">请先登录，否则无法加入到购物车中！</p>
+            <div slot="btnGroup">
+                <a class="btn btn--m" href="javascript:;" @click="mdShow = false">关闭</a>
+            </div>
+        </modal>
+        <modal :md-show="mdShowCart" @close="closeModal">
+            <p slot="message">
+                <svg class="icon-status-ok">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-status-ok"></use>
+                </svg>
+                <span>加入购物车成功</span>
+            </p>
+            <div slot="btnGroup">
+                <a class="btn btn--m" href="javascript:;" @click="mdShowCart = false">继续购物</a>
+                <router-link class="btn btn--m" href="javascript:;" to="/cart">查看购物车</router-link>
+            </div>
+        </modal>
+
     </div>
 </template>
 
@@ -77,10 +96,12 @@
     import NavFooter from './../components/NavFooter'
     import NavBread from './../components/NavBread'
     import {addCart, getGoodsList} from "../../api/goods";
+    import Modal from "../components/Modal";
 
     export default {
         name: "GoodsList",
         components: {
+            Modal,
             NavBread,
             NavFooter,
             NavHeader
@@ -108,6 +129,8 @@
                 sort: 1,
                 pageSize: 8,
                 loadingImage: true,
+                mdShow: false,
+                mdShowCart: false,
                 busy: true,
                 page: 1
             }
@@ -160,6 +183,7 @@
             getImagePath(src) {
                 return "/static/" + src
             },
+            // 加载更多，
             loadMore() {
                 this.busy = true
 
@@ -168,16 +192,22 @@
                     this.getGoodsList(true)
                 }, 1000)
             },
+            // 添加商品到购物车
             addCart(productId) {
                 addCart({
                     productId: productId
                 }).then(res => {
                     if (res.data.status === 0) {
-                        this.$Message.success('添加成功')
+                        // this.$Message.success('添加成功')
+                        this.mdShowCart = true
                     } else {
-                        this.$Message.error(res.data.msg)
+                        this.mdShow = true
                     }
                 })
+            },
+            closeModal() {
+                this.mdShow = false
+                this.mdShowCart = false
             }
         },
         watch: {
