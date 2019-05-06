@@ -40,7 +40,7 @@
         </svg>
         <nav-header></nav-header>
         <nav-bread>
-            <span slot="bread">Cart</span>
+            <span slot="bread">购物车</span>
         </nav-bread>
         <div class="accessory-result-page accessory-page" style="background-color: #ffffff;">
             <div class="container">

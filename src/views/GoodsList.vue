@@ -2,14 +2,14 @@
     <div>
         <nav-header></nav-header>
         <nav-bread>
-            <span slot="bread">Goods</span>
+            <span slot="bread">商品</span>
         </nav-bread>
         <div class="accessory-result-page accessory-page">
             <div class="container">
                 <div class="filter-nav">
-                    <span class="sortby">Sort by:</span>
-                    <a href="javascript:void(0)" class="default cur">Default</a>
-                    <a href="javascript:void(0)" class="price" @click="sortPrice">Price
+                    <span class="sortby">排列顺序：</span>
+                    <a href="javascript:void(0)" class="default cur">默认</a>
+                    <a href="javascript:void(0)" class="price" @click="sortPrice">价格
                         <svg class="icon icon-arrow-short" :class="{'sort-up': sort===1}">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-short"></use>
                         </svg>
@@ -111,16 +111,16 @@
                 goodsList: [],
                 priceFilter: [
                     {
-                        startPrice: '0.00',
-                        endPrice: '500.00'
+                        startPrice: '0',
+                        endPrice: '500'
                     },
                     {
-                        startPrice: '500.00',
-                        endPrice: '1000.00'
+                        startPrice: '500',
+                        endPrice: '1000'
                     },
                     {
-                        startPrice: '1000.00',
-                        endPrice: '2000.00'
+                        startPrice: '1000',
+                        endPrice: '2000'
                     }
                 ],
                 priceChecked: 'all',

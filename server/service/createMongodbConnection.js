@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 // 链接mongodb数据库
-mongoose.connect('mongodb://root:wyysdsa!@127.0.0.1:27017/dumall', {useNewUrlParser: true});
+mongoose.connect('mongodb://127.0.0.1:27017/dumall', {useNewUrlParser: true});
 
 mongoose.connection.on('connected', function () {
   console.log('connect successful')

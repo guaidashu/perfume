@@ -122,6 +122,9 @@
                 logout().then(res => {
                     if (res.data.status === 0) {
                         this.nickName = ''
+                        this.$router.push({
+                            path: "/"
+                        })
                     }
                 })
             },

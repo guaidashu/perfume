@@ -47,7 +47,7 @@
         </svg>
         <nav-header></nav-header>
         <nav-bread>
-            <span slot="bread">Address</span>
+            <span slot="bread">收货地址</span>
         </nav-bread>
         <div class="accessory-result-page accessory-page" style="background-color: #ffffff;">
             <div class="container">
