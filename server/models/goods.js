@@ -1,6 +1,7 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var productSchema = new Schema({
+let mongoose = require("mongoose");
+let mongoose_paginate = require('mongoose-paginate');
+let Schema = mongoose.Schema;
+let productSchema = new Schema({
   "productId": String,
   "productName": String,
   "salePrice": Number,
@@ -8,5 +9,7 @@ var productSchema = new Schema({
   "productNum": Number,
   "productImage": String
 });
+
+productSchema.plugin(mongoose_paginate);
 
 module.exports = mongoose.model('Good', productSchema, 'goods');

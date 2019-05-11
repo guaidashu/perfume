@@ -101,4 +101,4 @@ let GoodsController = {
   }
 }
 
-module.exports = GoodsController
+module.exports = GoodsController;

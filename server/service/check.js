@@ -8,7 +8,7 @@ let checkTools = {
         }
         return false
     }
-}
+};
 
 let check = {
     checkLogin(req, res, next) {
@@ -26,6 +26,6 @@ let check = {
             }
         }
     }
-}
+};
 
-module.exports = check
+module.exports = check;
