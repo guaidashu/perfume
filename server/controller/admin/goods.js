@@ -22,7 +22,6 @@ let GoodsController = {
         })
     },
     updateImage(req, res) {
-        let file = req.file
         let tmpPath = req.file.path
         let ext = '.' + req.file.originalname.split('.')[1];
         let fileName = req.file.filename + ext
@@ -42,7 +41,8 @@ let GoodsController = {
             productName: req.body.productName,
             salePrice: req.body.salePrice,
             productImage: req.body.productImage,
-            productId: req.body.productId
+            productId: req.body.productId,
+            productDescription: req.body.productDescription
         })
         goods.save(function (err, doc) {
             common.back(res, err, function (res, result) {
@@ -55,6 +55,23 @@ let GoodsController = {
             _id: req.body._id
         }
         Goods.deleteOne(condition, function (err, doc) {
+            common.back(res, err, function (res, result) {
+                res.json(result)
+            })
+        })
+    },
+    updateGoods(req, res) {
+        let condition = {
+            _id: req.body._id
+        }
+        let updateData = {
+            productName: req.body.productName,
+            salePrice: req.body.salePrice,
+            productImage: req.body.productImage,
+            productId: req.body.productId,
+            productDescription: req.body.productDescription
+        }
+        Goods.updateOne(condition, updateData, function (err, doc) {
             common.back(res, err, function (res, result) {
                 res.json(result)
             })

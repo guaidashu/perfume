@@ -23,4 +23,8 @@ router.post('/deleteGoods', function (req, res, next) {
     GoodsController.deleteGoods(req, res)
 });
 
+router.post('/updateGoods', function (req, res, next) {
+    GoodsController.updateGoods(req, res)
+});
+
 module.exports = router;
