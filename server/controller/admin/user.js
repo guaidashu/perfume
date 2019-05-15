@@ -1,5 +1,5 @@
 let common = require("../../service/common");
-let Goods = require('../../models/goods');
+let Users = require("../../models/user");
 
 let UserController = {
     login(req, res) {
@@ -17,6 +17,24 @@ let UserController = {
                 maxAge: 1000 * 60 * 60 * 60 * 24
             })
             res.json(result)
+        })
+    },
+    getUserInfo(req, res) {
+        let page = req.query.page
+        let size = req.query.size
+        if (!page) {
+            page = 1
+        }
+        if (!size) {
+            size = 10
+        }
+        page = parseInt(page)
+        size = parseInt(size)
+        Users.paginate({}, {page: page, sort: {"_id": -1}, limit: size}, function (err, doc) {
+            common.back(res, err, (res, result) => {
+                result.result = doc
+                res.json(result)
+            })
         })
     }
 };

@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+let mongoose_paginate = require('mongoose-paginate');
 let userSchma = new Schema({
     "userId": String,
     "userName": String,
@@ -51,5 +52,7 @@ let userSchma = new Schema({
         }
     ]
 });
+
+userSchma.plugin(mongoose_paginate);
 
 module.exports = mongoose.model('User', userSchma, 'users');
