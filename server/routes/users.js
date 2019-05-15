@@ -7,12 +7,13 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-// 登录
+
+// 登录 接口
 router.post('/login', function (req, res, next) {
     LoginController.login(res, req)
 });
 
-// 登出
+// 登出 接口
 router.post('/logout', function (req, res, next) {
     LoginController.logout(req, res)
 });
@@ -32,7 +33,7 @@ router.post('/cartDel', function (req, res, next) {
     UserController.delCart(req, res)
 });
 
-// 商品编辑
+// 商品编辑()
 router.post('/cartEdit', function (req, res, next) {
     UserController.cartEdit(req, res)
 });

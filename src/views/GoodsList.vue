@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 商品列表页 -->
         <nav-header></nav-header>
         <nav-bread>
             <span slot="bread">商品</span>
