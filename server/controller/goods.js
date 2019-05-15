@@ -1,6 +1,6 @@
 let common = require("../service/common");
 let Goods = require('../models/goods');
-let User = require('./../models/user')
+let User = require('./../models/user');
 
 let GoodsController = {
   // 获取商品列表
@@ -101,4 +101,4 @@ let GoodsController = {
   }
 }
 
-module.exports = GoodsController
+module.exports = GoodsController;

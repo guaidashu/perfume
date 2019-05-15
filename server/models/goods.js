@@ -1,12 +1,16 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var productSchema = new Schema({
-  "productId": String,
-  "productName": String,
-  "salePrice": Number,
-  "checked": String,
-  "productNum": Number,
-  "productImage": String
+let mongoose = require("mongoose");
+let mongoose_paginate = require('mongoose-paginate');
+let Schema = mongoose.Schema;
+let productSchema = new Schema({
+    "productId": String,
+    "productName": String,
+    "salePrice": Number,
+    "checked": String,
+    "productNum": Number,
+    "productImage": String,
+    "productDescription": String
 });
+
+productSchema.plugin(mongoose_paginate);
 
 module.exports = mongoose.model('Good', productSchema, 'goods');

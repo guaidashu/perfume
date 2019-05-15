@@ -93,24 +93,6 @@
                                     </div>
                                     <div class="addr-opration addr-default" v-if="item.isDefault">默认地址</div>
                                 </li>
-                                <!--<li>-->
-                                <!--<dl>-->
-                                <!--<dt>小王</dt>-->
-                                <!--<dd class="address">四川自贡</dd>-->
-                                <!--<dd class="tel">188482000000</dd>-->
-                                <!--</dl>-->
-                                <!--<div class="addr-opration addr-del">-->
-                                <!--<a href="javascript:;" class="addr-del-btn">-->
-                                <!--<svg class="icon icon-del">-->
-                                <!--<use xlink:href="#icon-del"></use>-->
-                                <!--</svg>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="addr-opration addr-set-default">-->
-                                <!--<a href="javascript:;" class="addr-set-default-btn"><i>默认选择</i></a>-->
-                                <!--</div>-->
-                                <!--<div class="addr-opration addr-default">默认地址</div>-->
-                                <!--</li>-->
                                 <li class="addr-new">
                                     <div class="add-new-inner">
                                         <i class="icon-add">

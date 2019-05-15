@@ -1,4 +1,3 @@
-
 let GoodsController = require('../controller/goods')
 
 var express = require('express');
@@ -13,7 +12,7 @@ router.get('/list', function (req, res, next) {
 // 加入到购物车
 router.post('/addCart', function (req, res, next) {
   GoodsController.addCart(req, res)
-})
+});
 
 
 module.exports = router;

@@ -4,6 +4,8 @@ urls = [
     '/users/login',
     '/users/logout',
     '/users/checkLogin',
+    "/admin/users/login",
+    "/admin/users/getInfo",
 ];
 
 module.exports = urls;
