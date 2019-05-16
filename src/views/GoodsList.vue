@@ -182,7 +182,7 @@
                 this.sort === -1 ? this.sort = 1 : this.sort = -1
             },
             getImagePath(src) {
-                return "/static/" + src
+                return "/static/upload/" + src
             },
             // 加载更多，
             loadMore() {

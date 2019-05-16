@@ -1,6 +1,7 @@
 let User = require('./../models/user');
 let common = require('./../service/common');
 require('./../util/util');
+let md5 = require('md5-node');
 
 let UserController = {
     cartList(req, res) {
@@ -165,6 +166,20 @@ let UserController = {
                     })
                 })
 
+            })
+        })
+    },
+    // 注册 逻辑处理函数
+    register(req, res) {
+        let userInfo = new User({
+            userId: req.body.phone,
+            userName: req.body.userName,
+            userPwd: md5(req.body.password),
+            userPhone: req.body.phone
+        })
+        userInfo.save(function (err, doc) {
+            common.back(res, err, function (res, result) {
+                res.json(result)
             })
         })
     }

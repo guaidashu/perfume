@@ -5,6 +5,7 @@ let userSchma = new Schema({
     "userId": String,
     "userName": String,
     "userPwd": String,
+    "userPhone": String,
     "orderList": [
         {
             "orderId": String,

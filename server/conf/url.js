@@ -3,6 +3,7 @@ urls = [
     '/goods/list',
     '/users/login',
     '/users/logout',
+    '/users/register',
     '/users/checkLogin',
     "/admin/users/login",
     "/admin/users/getInfo",

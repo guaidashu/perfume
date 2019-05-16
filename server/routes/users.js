@@ -63,4 +63,9 @@ router.post("/payMent", function (req, res, next) {
     UserController.payMent(req, res)
 });
 
+// 注册
+router.post('/register', function (req, res, next) {
+    UserController.register(req, res)
+});
+
 module.exports = router;

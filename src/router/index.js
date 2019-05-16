@@ -30,6 +30,11 @@ export default new Router({
             path: '/orderConfirm',
             name: 'orderConfirm',
             component: () => import('../views/OrderConfirm')
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: () => import('../views/login/Register')
         }
     ]
 })

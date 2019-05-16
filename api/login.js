@@ -11,3 +11,7 @@ export const logout = () => {
 export const checkLogin = () => {
     return axios({url: '/users/checkLogin', method: 'post'})
 }
+
+export const register = (post) => {
+    return axios({url: '/users/register', method: 'post', data: post})
+}
