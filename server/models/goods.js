@@ -8,7 +8,9 @@ let productSchema = new Schema({
     "checked": String,
     "productNum": Number,
     "productImage": String,
-    "productDescription": String
+    "productDescription": String,
+    "productType": String,
+    "productTypeName": String
 });
 
 productSchema.plugin(mongoose_paginate);

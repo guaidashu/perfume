@@ -182,6 +182,31 @@ let UserController = {
                 res.json(result)
             })
         })
+    },
+    // 添加新地址
+    addNewAddress(req, res) {
+        let condition = {userId: req.cookies.userId}
+        // 构造要添加的地址数据
+        let address = {
+            addressId: md5(condition.userId + req.body.postCode + req.body.streetName),
+            userName: req.body.userName,
+            streetName: req.body.streetName,
+            postCode: req.body.postCode,
+            tel: req.body.tel
+        }
+        // 首先根据cookie里的用户id获取到用户信息，如果正确查找到，则进行添加操作
+        User.findOne(condition, function (err, doc) {
+            common.back(res, err, function (res, result) {
+                // 将构造好的地址数据添加到用户信息
+                doc.addressList.push(address)
+                // 更新(存储)到数据库
+                doc.save(function (err, docs) {
+                    common.back(res, err, function (res, result) {
+                        res.json(result)
+                    })
+                })
+            })
+        })
     }
 };
 

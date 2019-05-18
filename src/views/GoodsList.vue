@@ -21,6 +21,16 @@
                     <!-- filter -->
                     <div class="filter stopPop" id="filter" :class="{'filterby-show': filterBy}">
                         <dl class="filter-price">
+                            <dt>选择分类:</dt>
+                            <dd><a href="javascript:void(0)" @click="setTypeFilter('all')"
+                                   :class="{'cur': typeChecked=='all'}">All</a></dd>
+                            <dd v-for="(item, index) in types" :key="index">
+                                <a href="javascript:void(0)" @click="setTypeFilter(item._id)"
+                                   :class="{'cur': typeChecked==item._id}">{{item.name}}</a>
+                            </dd>
+                        </dl>
+
+                        <dl class="filter-price">
                             <dt>Price:</dt>
                             <dd><a href="javascript:void(0)" @click="setPriceFilter('all')"
                                    :class="{'cur': priceChecked=='all'}">All</a></dd>
@@ -96,7 +106,7 @@
     import NavHeader from '../components/NavHeader'
     import NavFooter from './../components/NavFooter'
     import NavBread from './../components/NavBread'
-    import {addCart, getGoodsList} from "../../api/goods";
+    import {addCart, getGoodsList, getTypeData} from "../../api/goods";
     import Modal from "../components/Modal";
 
     export default {
@@ -133,19 +143,23 @@
                 mdShow: false,
                 mdShowCart: false,
                 busy: true,
+                types: [],
+                typeChecked: 'all',
                 page: 1
             }
         },
         methods: {
             init() {
                 this.getGoodsList(false)
+                this.getTypeData()
             },
             getGoodsList(flag) {
                 getGoodsList({
                     page: this.page,
                     pageSize: this.pageSize,
                     sort: this.sort,
-                    priceLevel: this.priceChecked
+                    priceLevel: this.priceChecked,
+                    productType: this.typeChecked
                 }).then(res => {
 
                     if (flag) {
@@ -173,6 +187,11 @@
             },
             setPriceFilter(index) {
                 this.priceChecked = index
+                this.page = 1
+                this.closePop()
+            },
+            setTypeFilter(index) {
+                this.typeChecked = index
                 this.page = 1
                 this.closePop()
             },
@@ -209,11 +228,20 @@
             closeModal() {
                 this.mdShow = false
                 this.mdShowCart = false
-            }
+            },
+            getTypeData() {
+                getTypeData({page: this.page}).then(res => {
+                    let data = res.data
+                    if (data.status === 0) {
+                        this.types = data.result
+                    }
+                })
+            },
         },
         watch: {
             'sort': 'init',
-            'priceChecked': 'init'
+            'priceChecked': 'init',
+            'typeChecked': 'init'
         },
         mounted() {
             this.init()

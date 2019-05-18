@@ -7,3 +7,7 @@ export const getGoodsList = (params) => {
 export const addCart = (post) => {
     return axios.request({url: '/goods/addCart', method: 'post', data: post})
 }
+
+export const getTypeData = () => {
+    return axios.request({url: '/goods/getTypeAllData', method: 'post'})
+}

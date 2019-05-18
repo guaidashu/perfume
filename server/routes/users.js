@@ -68,4 +68,9 @@ router.post('/register', function (req, res, next) {
     UserController.register(req, res)
 });
 
+// 添加新地址
+router.post("/addNewAddress", function (req, res, next) {
+    UserController.addNewAddress(req, res)
+});
+
 module.exports = router;

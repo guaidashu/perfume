@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="addr-opration addr-default" v-if="item.isDefault">默认地址</div>
                                 </li>
-                                <li class="addr-new">
+                                <li class="addr-new" @click="showAddModal">
                                     <div class="add-new-inner">
                                         <i class="icon-add">
                                             <svg class="icon icon-add">
@@ -144,7 +144,7 @@
             </div>
         </div>
         <nav-footer></nav-footer>
-        <modal :md-show="isMdShow" @close="closeModal">
+        <maodal :md-show="isMdShow" @close="closeModal">
             <p slot="message">
                 您是否确认要删除此地址？
             </p>
@@ -152,7 +152,27 @@
                 <a class="btn btn--m" href="javascript:;" @click="delAddress">确认</a>
                 <a class="btn btn--m" href="javascript:;" @click="closeModal">取消</a>
             </div>
-        </modal>
+        </maodal>
+        <Modal title="添加新地址" v-model="addModal">
+            <Form :model="form" :rules="formRule">
+                <FormItem label="收件人" prop="userName">
+                    <Input type="text" v-model="form.userName"></Input>
+                </FormItem>
+                <FormItem label="街道名(具体地址)" prop="streetName">
+                    <Input type="text" v-model="form.streetName"></Input>
+                </FormItem>
+                <FormItem label="邮编" prop="postCode">
+                    <Input type="text" v-model="form.postCode"></Input>
+                </FormItem>
+                <FormItem label="电话号码" prop="tel">
+                    <Input type="text" v-model="form.tel"></Input>
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                <Button type="primary" size="large" @click="addNewAddress">确认添加</Button>
+                <Button type="error" size="large" @click="closeAddModal">关闭</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -164,13 +184,13 @@
     import NavHeader from '../components/NavHeader'
     import NavFooter from './../components/NavFooter'
     import NavBread from './../components/NavBread'
-    import {delAddress, getAddressList, setDefaultAddress} from "../../api/user";
-    import Modal from "../components/Modal";
+    import {addNewAddress, delAddress, getAddressList, setDefaultAddress} from "../../api/user";
+    import Maodal from "../components/Modal";
 
     export default {
         name: "Address",
         components: {
-            Modal,
+            Maodal,
             NavBread,
             NavFooter,
             NavHeader
@@ -181,13 +201,62 @@
             }
         },
         data() {
+            const validateUserName = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入收件人'))
+                } else {
+                    callback()
+                }
+            };
+            const validateStreetName = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('街道名不能为空'))
+                } else {
+                    callback()
+                }
+            };
+            const validatePostCode = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('邮编不能为空'))
+                } else {
+                    callback()
+                }
+            };
+            const validateTel = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('电话不能为空'))
+                } else {
+                    callback()
+                }
+            };
             return {
                 limit: 3,
                 checkIndex: 0,
                 isMdShow: false,
                 selectedAddressId: 0,
                 addressId: null,
-                addressList: []
+                addressList: [],
+                addModal: false,
+                form: {
+                    userName: '',
+                    streetName: '',
+                    postCode: '',
+                    tel: ''
+                },
+                formRule: {
+                    userName: [
+                        {validator: validateUserName, trigger: 'blur', required: true}
+                    ],
+                    streetName: [
+                        {validator: validateStreetName, trigger: 'blur', required: true}
+                    ],
+                    postCode: [
+                        {validator: validatePostCode, trigger: 'blur', required: true}
+                    ],
+                    tel: [
+                        {validator: validateTel, trigger: 'blur', required: true}
+                    ]
+                }
             }
         },
         methods: {
@@ -235,6 +304,28 @@
                         this.init()
                         this.closeModal()
                         console.log('删除成功')
+                    }
+                })
+            },
+            showAddModal() {
+                this.addModal = true
+            },
+            closeAddModal() {
+                this.addModal = false
+            },
+            addNewAddress() {
+                for (let i in this.form) {
+                    if (this.form[i] === '') {
+                        this.$Message.error("请输入正确的信息")
+                        return
+                    }
+                }
+                addNewAddress(this.form).then(res => {
+                    let data = res.data
+                    if (data.status === 0) {
+                        this.$Message.success("添加成功")
+                        this.init()
+                        this.closeAddModal()
                     }
                 })
             }
