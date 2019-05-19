@@ -62,15 +62,17 @@
                         <div class="accessory-list col-4">
                             <ul>
                                 <li v-for="(item, index) in goodsList" :key="index">
-                                    <div class="pic">
-                                        <a href="#">
+                                    <div class="pic" @click="goDetail(item._id)">
+                                        <a href="javascript:;">
                                             <!--<img v-lazy="getImagePath(item.productImage)" alt="">-->
                                             <img :src="getImagePath(item.productImage)"
                                                  v-lazy="getImagePath(item.productImage)" alt="">
                                         </a>
                                     </div>
                                     <div class="main">
-                                        <div class="name">{{item.productName}}</div>
+                                        <div class="name" style="cursor: pointer;" @click="goDetail(item._id)">
+                                            {{item.productName}}
+                                        </div>
                                         <div class="price">{{item.salePrice | currency('￥')}}</div>
                                         <div class="btn-area">
                                             <a href="javascript:;" class="btn btn--m" @click="addCart(item.productId)">加入购物车</a>
@@ -265,6 +267,14 @@
                     let data = res.data
                     if (data.status === 0) {
                         this.types = data.result
+                    }
+                })
+            },
+            goDetail(_id) {
+                this.$router.push({
+                    path: '/detail',
+                    query: {
+                        _id: _id
                     }
                 })
             }

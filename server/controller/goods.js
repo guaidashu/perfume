@@ -21,8 +21,6 @@ let GoodsController = {
         let productName = req.param("productName");
         let productType = req.param("productType");
         let params = {};
-        console.log(priceGt)
-        console.log(priceLte)
         if (priceGt > 0 && priceLte === 0) {
             params = {
                 salePrice: {
@@ -108,6 +106,14 @@ let GoodsController = {
             })
         })
     },
+    getGoodsInfo(req, res) {
+        let condition = {_id: req.body._id}
+        Goods.find(condition, function (err, doc) {
+            common.back(res, err, function (res, result) {
+                common.getType(doc, res, result)
+            })
+        })
+    }
 }
 
 module.exports = GoodsController;

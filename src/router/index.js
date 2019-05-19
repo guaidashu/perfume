@@ -69,6 +69,14 @@ const router = new Router({
                 title: '登录'
             },
             component: () => import("../views/login/login")
+        },
+        {
+            path: '/detail',
+            name: 'detail',
+            meta: {
+                title: '商品详情'
+            },
+            component: () => import("../views/Detail")
         }
     ]
 })

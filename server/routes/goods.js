@@ -19,5 +19,10 @@ router.post("/getTypeAllData", function (req, res, next) {
     GoodsController.getTypeAllData(req, res)
 });
 
+// 获取商品信息
+router.post("/getGoodsInfo", function (req, res, next) {
+    GoodsController.getGoodsInfo(req, res)
+});
+
 
 module.exports = router;

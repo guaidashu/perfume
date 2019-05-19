@@ -11,3 +11,7 @@ export const addCart = (post) => {
 export const getTypeData = () => {
     return axios.request({url: '/goods/getTypeAllData', method: 'post'})
 }
+
+export const getGoodsInfo = (post) => {
+    return axios.request({url: '/goods/getGoodsInfo', method: 'post', data: post})
+}
