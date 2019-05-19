@@ -2,6 +2,9 @@
     <!--    注册界面-->
     <div>
         <nav-header></nav-header>
+        <nav-bread>
+            <span slot="bread">注册</span>
+        </nav-bread>
         <div class="register_container">
             <Form ref="formCustom" :model="form" :rules="formRule">
                 <FormItem label="用户名" prop="userName">
@@ -35,6 +38,7 @@
     import NavHeader from "../../components/NavHeader";
     import Form from "iview/src/components/form/form";
     import {register} from '../../../api/login'
+    import NavBread from "../../components/NavBread";
 
 
     export default {
@@ -109,7 +113,7 @@
                 })
             }
         },
-        components: {Form, NavHeader, NavFooter}
+        components: {NavBread, Form, NavHeader, NavFooter}
     }
 </script>
 

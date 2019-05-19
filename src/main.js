@@ -9,6 +9,7 @@ import VueResource from 'vue-resource'
 import VueLazy from 'vue-lazyload'
 import infiniteScroll from 'vue-infinite-scroll'
 import {currency} from './util/currency'
+import $ from 'jquery'
 
 Vue.config.productionTip = false
 Vue.filter("currency", currency)

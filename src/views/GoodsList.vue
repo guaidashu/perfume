@@ -32,13 +32,28 @@
 
                         <dl class="filter-price">
                             <dt>Price:</dt>
-                            <dd><a href="javascript:void(0)" @click="setPriceFilter('all')"
-                                   :class="{'cur': priceChecked=='all'}">All</a></dd>
-                            <dd v-for="(item, index) in priceFilter" :key="index">
-                                <a href="javascript:void(0)" @click="setPriceFilter(index)"
-                                   :class="{'cur': priceChecked==index}">{{item.startPrice}}
-                                    - {{item.endPrice}}</a>
+                            <dd>
+                                <Poptip trigger="focus">
+                                    <Input v-model="priceGt" placeholder="请输入起始价格" style="width: 120px"/>
+                                    <div slot="content">{{ formatNumber }}</div>
+                                </Poptip>
                             </dd>
+                            <dd>
+                                <Poptip trigger="focus">
+                                    <Input v-model="priceLte" placeholder="请输入最高价格" style="width: 120px"/>
+                                    <div slot="content">{{ formatNumber_2 }}</div>
+                                </Poptip>
+                            </dd>
+                            <dd>
+                                <Button type="primary" size="large" @click="init">搜索</Button>
+                            </dd>
+                            <!--                            <dd><a href="javascript:void(0)" @click="setPriceFilter('all')"-->
+                            <!--                                   :class="{'cur': priceChecked=='all'}">All</a></dd>-->
+                            <!--                            <dd v-for="(item, index) in priceFilter" :key="index">-->
+                            <!--                                <a href="javascript:void(0)" @click="setPriceFilter(index)"-->
+                            <!--                                   :class="{'cur': priceChecked==index}">{{item.startPrice}}-->
+                            <!--                                    - {{item.endPrice}}</a>-->
+                            <!--                            </dd>-->
                         </dl>
                     </div>
 
@@ -56,7 +71,7 @@
                                     </div>
                                     <div class="main">
                                         <div class="name">{{item.productName}}</div>
-                                        <div class="price">{{item.salePrice}}</div>
+                                        <div class="price">{{item.salePrice | currency('￥')}}</div>
                                         <div class="btn-area">
                                             <a href="javascript:;" class="btn btn--m" @click="addCart(item.productId)">加入购物车</a>
                                         </div>
@@ -144,22 +159,37 @@
                 mdShowCart: false,
                 busy: true,
                 types: [],
+                priceGt: 0,
+                priceLte: 0,
+                searchTitle: '',
                 typeChecked: 'all',
-                page: 1
+                page: 1,
             }
         },
         methods: {
             init() {
+                this.page = 1
                 this.getGoodsList(false)
-                this.getTypeData()
+                this.closePop()
             },
             getGoodsList(flag) {
+                let tmp
+                tmp = this.$route.query.title
+                if (tmp) {
+                    this.searchTitle = tmp
+                }
+                tmp = this.$route.query.category
+                if (tmp) {
+                    this.typeChecked = tmp
+                }
                 getGoodsList({
                     page: this.page,
                     pageSize: this.pageSize,
                     sort: this.sort,
-                    priceLevel: this.priceChecked,
-                    productType: this.typeChecked
+                    priceGt: this.priceGt,
+                    priceLte: this.priceLte,
+                    productType: this.typeChecked,
+                    productName: this.searchTitle
                 }).then(res => {
 
                     if (flag) {
@@ -185,12 +215,13 @@
                 this.filterBy = false
                 this.overLayFlag = false
             },
-            setPriceFilter(index) {
-                this.priceChecked = index
-                this.page = 1
-                this.closePop()
-            },
             setTypeFilter(index) {
+                let tmp = this.$route.query.category
+                if (tmp) {
+                    this.$router.push({
+                        path: '/search'
+                    })
+                }
                 this.typeChecked = index
                 this.page = 1
                 this.closePop()
@@ -236,15 +267,38 @@
                         this.types = data.result
                     }
                 })
+            }
+        },
+        computed: {
+            formatNumber() {
+                if (this.priceGt === 0) return '请输入最低价格';
+
+                function parseNumber(str) {
+                    const re = /(?=(?!)(d{3})+$)/g;
+                    return str.replace(re, ',');
+                }
+
+                return parseNumber(this.priceGt);
             },
+            formatNumber_2() {
+                if (this.priceLte === 0) return '请输入最高价格';
+
+                function parseNumber(str) {
+                    const re = /(?=(?!)(d{3})+$)/g;
+                    return str.replace(re, ',');
+                }
+
+                return parseNumber(this.priceLte);
+            }
         },
         watch: {
             'sort': 'init',
-            'priceChecked': 'init',
-            'typeChecked': 'init'
+            'typeChecked': 'init',
+            'searchTitle': 'init'
         },
         mounted() {
             this.init()
+            this.getTypeData()
         }
     }
 </script>

@@ -9,31 +9,27 @@ let GoodsController = {
 
         let page = parseInt(req.param("page"));
         let pageSize = parseInt(req.param("pageSize"));
-        let priceLevel = req.param("priceLevel");
-        let priceGt = 0, priceLte = 0;
+        let priceGt = parseInt(req.param("priceGt")), priceLte = parseInt(req.param("priceLte"));
+        if (!priceGt) {
+            priceGt = 0
+        }
+        if (!priceLte) {
+            priceLte = 0
+        }
         let skip = common.getSkipNum(page, pageSize);
         let sort = parseInt(req.param("sort"));
+        let productName = req.param("productName");
         let productType = req.param("productType");
         let params = {};
-        if (priceLevel !== 'all') {
-            switch (priceLevel) {
-                case '0':
-                    priceGt = 0;
-                    priceLte = 100;
-                    break;
-                case '1':
-                    priceGt = 100;
-                    priceLte = 500;
-                    break;
-                case '2':
-                    priceGt = 500;
-                    priceLte = 1000;
-                    break;
-                case '3':
-                    priceGt = 1000;
-                    priceLte = 2000;
-                    break;
+        console.log(priceGt)
+        console.log(priceLte)
+        if (priceGt > 0 && priceLte === 0) {
+            params = {
+                salePrice: {
+                    $gt: priceGt
+                }
             }
+        } else if (priceLte > 0 && priceGt <= priceLte) {
             params = {
                 salePrice: {
                     $gt: priceGt,
@@ -41,8 +37,11 @@ let GoodsController = {
                 }
             }
         }
-        if (productType !== 'all') {
+        if (productType != 'all') {
             params.productType = productType
+        }
+        if (productName != '') {
+            params.productName = {$regex: productName}
         }
 
         // 排序

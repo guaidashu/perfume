@@ -1,12 +1,13 @@
 let common = require("../service/common");
 let User = require('./../models/user')
+let md5 = require("md5-node");
 
 let LoginController = {
     // 登录接口
     login(res, req) {
         let params = {
             userName: req.body.userName,
-            userPwd: req.body.userPwd
+            userPwd: md5(req.body.userPwd)
         }
         User.findOne(params, (err, doc) => {
             common.back(res, err, function (res, result) {

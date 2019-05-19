@@ -31,7 +31,7 @@
         <div class="navbar">
             <!--        logo-->
             <div class="navbar-left-container">
-                <a href="#">
+                <a href="/">
                     <span class="nav-left">PERFUME</span>
                 </a>
             </div>
@@ -85,7 +85,7 @@
                         <a href="javascript:;" class="btn-login" @click="login">登 录</a>
                     </div>
                     <div style="text-align: center; color: #999;height: 50px; width:100%; line-height: 50px;font-size: 13px; ">
-                        <router-link to="/register" class="register" >注册账号</router-link>
+                        <router-link to="/register" class="register">注册账号</router-link>
                     </div>
                 </div>
             </div>
@@ -97,6 +97,9 @@
 <script>
     import './../assets/css/login.css'
     import {checkLogin, login, logout} from "../../api/login";
+
+    let common = require("../../server/service/common");
+    let check = require("../../server/service/check");
 
     export default {
         name: "Header",
@@ -149,6 +152,13 @@
                 checkLogin().then(res => {
                     if (res.data.status === 0) {
                         this.nickName = res.data.result.userName
+                    } else {
+                        let path = common.getRootPath()
+                        if (!check.checkUrl(path)) {
+                            this.$router.push({
+                                path: "/login"
+                            })
+                        }
                     }
                 })
             }

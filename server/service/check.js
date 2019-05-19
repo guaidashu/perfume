@@ -2,8 +2,17 @@ let checkTools = {
     checkUrl(req) {
         let urls = require('./../conf/url')
         for (let i in urls) {
-            if (req.originalUrl.indexOf(urls[i]) > -1) {
+            if (req === '/') {
                 return true
+            }
+            try {
+                if (req.originalUrl.indexOf(urls[i]) > -1) {
+                    return true
+                }
+            } catch (e) {
+                if (req.indexOf(urls[i]) > -1) {
+                    return true
+                }
             }
         }
         return false
@@ -25,6 +34,10 @@ let check = {
                 })
             }
         }
+    },
+    // 登录拦截检查前端的页面是否放行
+    checkUrl(url) {
+        return checkTools.checkUrl(url);
     }
 };
 
