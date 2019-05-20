@@ -1,7 +1,7 @@
 .log_body {
     height: 100%;
     width: 100%;
-    background: url(./../images/log_images/log3.jpeg);
+    background: url(./../images/log_images/log3.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -15,7 +15,7 @@
     .log_body {
         height: 100%;
         width: 100%;
-        background: url(./../images/log_images/log2.jpeg);
+        background: url(./../images/log_images/log2.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -29,7 +29,7 @@
     .log_body {
         height: 100%;
         width: 100%;
-        background: url(./../images/log_images/log4.jpeg);
+        background: url(./../images/log_images/log4.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -43,7 +43,7 @@
     .log_body {
         height: 100%;
         width: 100%;
-        background-image: url(./../images/log_images/log.jpeg);
+        background-image: url(./../images/log_images/log.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;

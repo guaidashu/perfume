@@ -9,7 +9,7 @@
         <div style="padding: 0px 30px;">
             <Row :gutter="16">
                 <Col span="6">
-                    <div class="category_container" @click="search('5cdfe08d0ed1cd5763aa734b')">
+                    <div class="category_container" @click="search('5ce21e6061c56f52dc40baca')">
                         <div class="category_image_container"
                              style="background-image: url(/static/images/index/1.jpg)"></div>
                         <div class="category_content_container">
@@ -18,7 +18,7 @@
                     </div>
                 </Col>
                 <Col span="6">
-                    <div class="category_container" @click="search('5cdfe0910ed1cd5763aa734c')">
+                    <div class="category_container" @click="search('5ce21e7161c56f52dc40bacb')">
                         <div class="category_image_container"
                              style="background-image: url(/static/images/index/2.jpg)"></div>
                         <div class="category_content_container">
@@ -27,7 +27,7 @@
                     </div>
                 </Col>
                 <Col span="6">
-                    <div class="category_container" @click="search('5cdf8da986ec27563aeda381')">
+                    <div class="category_container" @click="search('5ce21e7561c56f52dc40bacc')">
                         <div class="category_image_container"
                              style="background-image: url(/static/images/index/3.jpg)"></div>
                         <div class="category_content_container">
@@ -36,7 +36,7 @@
                     </div>
                 </Col>
                 <Col span="6">
-                    <div class="category_container" @click="search('5cdfe0950ed1cd5763aa734d')">
+                    <div class="category_container" @click="search('5ce21e7a61c56f52dc40bacd')">
                         <div class="category_image_container"
                              style="background-image: url(/static/images/index/4.jpg)"></div>
                         <div class="category_content_container">

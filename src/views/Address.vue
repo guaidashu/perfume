@@ -60,8 +60,8 @@
                         <ul>
                             <li class="cur"><span>确认</span> 地址</li>
                             <li><span>查看</span> 订单</li>
-                            <li><span>付</span> 款</li>
-                            <li><span>订单</span> 确认</li>
+<!--                            <li><span>付</span> 款</li>-->
+                            <li><span>下单</span> 成功</li>
                         </ul>
                     </div>
 
@@ -127,9 +127,9 @@
                             <ul>
                                 <li class="check">
                                     <div class="name">标准运输</div>
-                                    <div class="price">免费</div>
+                                    <div class="price">货到付款</div>
                                     <div class="shipping-tips">
-                                        <p>发货后，将在1~7个工作日到达</p>
+                                        <p>发货后，将在1~7个工作日到达!</p>
                                     </div>
                                 </li>
                             </ul>

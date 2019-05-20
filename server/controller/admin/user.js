@@ -43,7 +43,7 @@ let UserController = {
             _id: req.body._id
         }
         let userInfo = {
-            password: md5(req.body.password)
+            userPwd: md5(req.body.password)
         }
         Users.updateOne(condition, userInfo, function (err, doc) {
             common.back(res, err, function (res, result) {

@@ -970,9 +970,9 @@ html {
 }
 
 @media screen and (max-width: 991px) {
-  .footer__nav a {
-    font-size: 12px;
-  }
+    .footer__nav a {
+        font-size: 12px;
+    }
 
   .footer__secondary__nav a,
   .footer__secondary__nav span {
