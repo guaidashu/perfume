@@ -77,6 +77,14 @@ const router = new Router({
                 title: '商品详情'
             },
             component: () => import("../views/Detail")
+        },
+        {
+            path: '/orderSuccess',
+            name: 'orderSuccess',
+            meta: {
+                title: '下单成功'
+            },
+            component: () => import("../views/Success")
         }
     ]
 })

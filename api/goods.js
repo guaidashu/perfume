@@ -15,3 +15,7 @@ export const getTypeData = () => {
 export const getGoodsInfo = (post) => {
     return axios.request({url: '/goods/getGoodsInfo', method: 'post', data: post})
 }
+
+export const getOrderInfo = (post) => {
+    return axios.request({url: '/goods/getOrderInfo', method: 'post', data: post})
+}

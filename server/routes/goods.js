@@ -24,5 +24,9 @@ router.post("/getGoodsInfo", function (req, res, next) {
     GoodsController.getGoodsInfo(req, res)
 });
 
+// 获取订单信息
+router.post("/getOrderInfo", function (req, res, next) {
+    GoodsController.getOrderInfo(req, res)
+});
 
 module.exports = router;

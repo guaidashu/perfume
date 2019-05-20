@@ -113,6 +113,25 @@ let GoodsController = {
                 common.getType(doc, res, result)
             })
         })
+    },
+    getOrderInfo(req, res){
+        let condition = {
+            userId: req.cookies.userId
+        }
+        let orderId = req.body.orderId
+        User.find(condition, function (err, doc) {
+            common.back(res, err, function (res, result) {
+                let orderList = doc[0].orderList
+                let order = {}
+                orderList.forEach((item) => {
+                    if (item.orderId === orderId){
+                        order = item
+                    }
+                })
+                result.result = order
+                res.json(result)
+            })
+        })
     }
 }
 
