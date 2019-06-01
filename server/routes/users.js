@@ -73,4 +73,9 @@ router.post("/addNewAddress", function (req, res, next) {
     UserController.addNewAddress(req, res)
 });
 
+// 获取用户信息
+router.post("/getUserInfo", function (req, res, next) {
+    UserController.getUserInfo(req, res)
+})
+
 module.exports = router;

@@ -207,6 +207,15 @@ let UserController = {
                 })
             })
         })
+    },
+    getUserInfo(req, res) {
+        let condition = {userId: req.cookies.userId}
+        User.findOne(condition, function (err, doc) {
+            common.back(res, err, function (res, result) {
+                result.result = doc
+                res.json(result)
+            })
+        })
     }
 };
 

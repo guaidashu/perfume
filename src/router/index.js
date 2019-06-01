@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
             path: '/',
@@ -85,6 +85,57 @@ const router = new Router({
                 title: '下单成功'
             },
             component: () => import("../views/Success")
+        },
+        {
+            path: '/user',
+            name: 'user',
+            meta: {
+                title: '用户信息'
+            },
+            redirect: '/user/userInfo',
+            component: () => import("../views/user/User"),
+            children: [
+                {
+                    path: 'userInfo',
+                    name: 'userInfo',
+                    meta: {
+                        title: '查看信息'
+                    },
+                    component: () => import("../views/user/userInfo")
+                },
+                {
+                    path: 'changePassword',
+                    name: 'changePassword',
+                    meta: {
+                        title: '修改密码'
+                    },
+                    component: () => import("../views/user/changePassword")
+                },
+                {
+                    path: 'orderList',
+                    name: 'orderList',
+                    meta: {
+                        title: '订单列表'
+                    },
+                    component: () => import("../views/user/orderList")
+                },
+            ]
+        },
+        {
+            path: '/moneyBack',
+            name: 'moneyBack',
+            meta: {
+                title: '退款申请'
+            },
+            component: () => import("../views/user/moneyBack")
+        },
+        {
+            path: '/moneyBackSuccess',
+            name: 'moneyBackSuccess',
+            meta: {
+                title: '退款申请提交成功'
+            },
+            component: () => import("../views/moneyBackSuccess")
         }
     ]
 })

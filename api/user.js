@@ -35,3 +35,7 @@ export const payMent = (post) => {
 export const addNewAddress = (post) => {
     return axios.request({url: '/users/addNewAddress', method: 'post', data: post})
 }
+
+export const getUserInfo = () => {
+    return axios.request({url: '/users/getUserInfo', method: 'post'})
+}

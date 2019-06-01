@@ -2,7 +2,7 @@
     <div class="nav-breadcrumb-wrap">
         <div class="container">
             <nav class="nav-breadcrumb">
-                <a href="/">主页</a>
+                <router-link to="/">主页</router-link>
                 <slot name="bread"></slot>
                 <div style="float: right; margin-top: -3px;">
                     <Input placeholder="输入商品名称" style="width: auto" v-model="searchTitle" @on-enter="searchGoods">
