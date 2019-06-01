@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="filter-nav">
                     <span class="sortby">排列顺序：</span>
-                    <a href="javascript:void(0)" class="default cur">默认</a>
+<!--                    <a href="javascript:void(0)" class="default cur">默认</a>-->
                     <a href="javascript:void(0)" class="price" @click="sortPrice">价格
                         <svg class="icon icon-arrow-short" :class="{'sort-up': sort===1}">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-short"></use>
@@ -31,7 +31,7 @@
                         </dl>
 
                         <dl class="filter-price">
-                            <dt>Price:</dt>
+                            <dt>价格:</dt>
                             <dd>
                                 <Poptip trigger="focus">
                                     <Input v-model="priceGt" placeholder="请输入起始价格" style="width: 120px"/>

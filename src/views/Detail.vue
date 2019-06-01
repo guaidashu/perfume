@@ -26,9 +26,10 @@
                             <h2>{{goodsInfo.productName}}</h2>
                         </div>
                         <div class="content_price">
-                            <span style="font-size: 25px; color: red;">{{goodsInfo.salePrice | currency('￥')}}</span>
+                            <span style="font-size: 25px; color: crimson;">{{goodsInfo.salePrice | currency('￥')}}</span>
                             <p style="float: right; font-size: 25px;">商品类型：{{goodsInfo.productTypeName}}</p>
                         </div>
+
                         <div class="content_introduce">
                             {{goodsInfo.productDescription}}
                         </div>
@@ -36,7 +37,9 @@
                 </Col>
             </Row>
         </div>
+        <nav-footer></nav-footer>
     </div>
+
 </template>
 
 <script>
@@ -44,14 +47,16 @@
     import './../assets/css/checkout.css'
     import './../assets/css/product.css'
     import {getGoodsInfo} from "../../api/goods";
-    import NavHeader from '../components/NavHeader';
-    import NavBread from "../components/NavBread";
+    import NavHeader from '../components/NavHeader'
+    import NavBread from "../components/NavBread"
+    import NavFooter from "../components/NavFooter"
 
     export default {
         name: "Detail",
         components: {
             NavBread,
-            NavHeader
+            NavHeader,
+            NavFooter
         },
         data() {
             return {

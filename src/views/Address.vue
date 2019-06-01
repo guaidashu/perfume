@@ -127,7 +127,7 @@
                             <ul>
                                 <li class="check">
                                     <div class="name">标准运输</div>
-                                    <div class="price">货到付款</div>
+                                    <div class="price">免费</div>
                                     <div class="shipping-tips">
                                         <p>发货后，将在1~7个工作日到达!</p>
                                     </div>
