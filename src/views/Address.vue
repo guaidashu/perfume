@@ -60,7 +60,7 @@
                         <ul>
                             <li class="cur"><span>确认</span> 地址</li>
                             <li><span>查看</span> 订单</li>
-<!--                            <li><span>付</span> 款</li>-->
+                            <li><span>付</span> 款</li>
                             <li><span>下单</span> 成功</li>
                         </ul>
                     </div>

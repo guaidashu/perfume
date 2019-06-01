@@ -136,6 +136,14 @@ const router = new Router({
                 title: '退款申请提交成功'
             },
             component: () => import("../views/moneyBackSuccess")
+        },
+        {
+            path: '/pay',
+            name: 'pay',
+            meta: {
+                title: '付款'
+            },
+            component: () => import("../views/Pay")
         }
     ]
 })

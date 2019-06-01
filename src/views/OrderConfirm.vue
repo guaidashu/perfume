@@ -44,7 +44,7 @@
                     <ul>
                         <li><span>确认</span> 地址</li>
                         <li class="cur"><span>查看</span> 订单</li>
-<!--                        <li><span>付</span> 款</li>-->
+                        <li><span>付</span> 款</li>
                         <li><span>下单</span> 成功</li>
                     </ul>
                 </div>
@@ -198,7 +198,7 @@
                 }).then(res => {
                     if (res.data.status === 0) {
                         this.$router.push({
-                            path: "/orderSuccess?orderId=" + res.data.result.orderId
+                            path: "/pay?orderId=" + res.data.result.orderId
                         })
                     }
                 })
