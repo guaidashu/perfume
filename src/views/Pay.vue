@@ -34,7 +34,8 @@
                     <h3>打开手机支付宝<br>扫一扫进行付款</h3>
                     <p>
                         <span>订单总计：5230</span>
-                        <Button type="primary" size="large" @click="success">确认已付款</Button>
+                        <br>
+                        <Button type="primary" size="large" @click="success" style="background-color: #d1434a; border-color: #d1434a; color: #fff">确认已付款</Button>
                     </p>
                     <div class="order-create-btn-wrap">
                         <!--                        <div class="btn-l-wrap">-->

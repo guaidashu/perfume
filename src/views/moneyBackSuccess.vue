@@ -29,7 +29,7 @@
 
 
             <div class="order-create">
-                <div class="order-create-pic"><img src="/static/images/success.png" alt=""></div>
+                <div class="order-create-pic"><img src="/static/images/back.png" alt=""></div>
                 <div class="order-create-main">
                     <h3>申请提交成功！<br>您的退款申请正在处理中！</h3>
                     <p>

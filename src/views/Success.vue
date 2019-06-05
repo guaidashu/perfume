@@ -37,12 +37,12 @@
                         <span>订单总计：{{orderInfo.orderTotal | currency('￥')}}</span>
                     </p>
                     <div class="order-create-btn-wrap">
-                        <div class="btn-l-wrap">
-                            <a class="btn btn--m">购物车清单</a>
-                        </div>
-                        <div class="btn-r-wrap">
-                            <a class="btn btn--m">商品清单</a>
-                        </div>
+<!--                        <div class="btn-l-wrap">-->
+<!--                            <a class="btn btn&#45;&#45;m">购物车清单</a>-->
+<!--                        </div>-->
+<!--                        <div class="btn-r-wrap">-->
+<!--                            <a class="btn btn&#45;&#45;m">商品清单</a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
