@@ -29,13 +29,17 @@
 
 
             <div class="order-create">
-                <div class="order-create-pic"><img src="../../resource/img/pay.jpg" alt=""></div>
+                <div class="order-create-pic"><img style="height: 300px; width: 300px;" src="../../resource/img/pay.jpg" alt="">
+                </div>
                 <div class="order-create-main">
                     <h3>打开手机支付宝<br>扫一扫进行付款</h3>
                     <p>
                         <span>订单总计：5230</span>
                         <br>
-                        <Button type="primary" size="large" @click="success" style="background-color: #d1434a; border-color: #d1434a; color: #fff">确认已付款</Button>
+                        <Button type="primary" size="large" @click="success"
+                                style="background-color: #d1434a; border-color: #d1434a; color: #fff; margin-top: 15px;">
+                            确认已付款
+                        </Button>
                     </p>
                     <div class="order-create-btn-wrap">
                         <!--                        <div class="btn-l-wrap">-->
@@ -87,5 +91,8 @@
 </script>
 
 <style scoped>
-
+    .order-create-pic{
+        width: 300px;
+        height: 300px;
+    }
 </style>

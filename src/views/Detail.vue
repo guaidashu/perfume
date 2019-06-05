@@ -28,7 +28,7 @@
 
                         <div class="content_price">
                             <span style="font-size: 25px; color: crimson;">{{goodsInfo.salePrice | currency('￥')}}</span>
-                            <p style="float: right; font-size: 20px;">商品类型：{{goodsInfo.productTypeName}}</p>
+                            <p style="float: right; font-size: 20px; margin-right: 20px;">商品类型：{{goodsInfo.productTypeName}}</p>
                         </div>
                         <div style="width: 100%; height: 30px;"></div>
                         <div class="content_introduce">
