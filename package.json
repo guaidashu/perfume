@@ -32,6 +32,7 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-lazy-load-img": "0.0.5",
     "vue-lazyload": "^1.2.6",
+    "vue-piczoom": "^1.0.6",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },

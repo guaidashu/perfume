@@ -18,12 +18,12 @@
                                             查看信息
                                         </MenuItem>
                                     </router-link>
-                                    <router-link to="/user/changePassword">
-                                        <MenuItem name="2">
-                                            <Icon type="md-chatbubbles"/>
-                                            修改密码
-                                        </MenuItem>
-                                    </router-link>
+<!--                                    <router-link to="/user/changePassword">-->
+<!--                                        <MenuItem name="2">-->
+<!--                                            <Icon type="md-chatbubbles"/>-->
+<!--                                            修改密码-->
+<!--                                        </MenuItem>-->
+<!--                                    </router-link>-->
                                 </MenuGroup>
                                 <MenuGroup title="购物信息">
                                     <router-link to="/user/orderList">
