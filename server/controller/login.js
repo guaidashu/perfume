@@ -5,10 +5,12 @@ let md5 = require("md5-node");
 let LoginController = {
     // 登录接口
     login(res, req) {
+        // 定义一个条件对象params,  获取前端用户输入的用户名和密码, 作为条件对象的内容
         let params = {
             userName: req.body.userName,
             userPwd: md5(req.body.userPwd)
         }
+        //根据条件进行查询,如果查到了结果就表示用户存在并且密码是正确的,登录成功;并且将用户信息存入cookie;否则登录错误,返回错误信息
         User.findOne(params, (err, doc) => {
             common.back(res, err, function (res, result) {
                 if (doc) {

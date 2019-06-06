@@ -39,6 +39,7 @@
                 <div class="navbar-menu-container">
                     <!-- <a href="/" class="navbar-link">我的账户</a> -->
                     <span class="navbar-link"></span>
+<!--                    根据nickName变量是否存在来判断用户是否登录，如果登录就显示用户名，否则就显示登录按钮-->
                     <span v-if="nickName"><router-link to="/user">{{nickName}}</router-link></span>
                     <a href="javascript:void(0)" class="navbar-link" @click="showLoginModal" v-else>登录</a>
                     <a href="javascript:void(0)" class="navbar-link" @click="logout">退出</a>
@@ -132,6 +133,7 @@
                     }
                 })
             },
+            // 登出
             logout() {
                 logout().then(res => {
                     if (res.data.status === 0) {
@@ -148,12 +150,16 @@
             closeLoginModal() {
                 this.loginModalFlag = false
             },
+            // 检查登录 并获取用户名
             checkLogin() {
                 checkLogin().then(res => {
                     if (res.data.status === 0) {
                         this.nickName = res.data.result.userName
                     } else {
+                        // 登录拦截
+                        // 获取当前要访问的url
                         let path = common.getRootPath()
+                        // 将获取到的url传给 checkUrl 进行判断,是否需要进行拦截, 返回一个布尔值(boolean) true表示不需要拦截, false需要拦截并跳转
                         if (!check.checkUrl(path)) {
                             this.$router.push({
                                 path: "/login"
@@ -163,6 +169,7 @@
                 })
             }
         },
+        // 挂载, 每次访问页面的时候就会执行一次mounted里面的内容
         mounted() {
             this.checkLogin()
         }
@@ -170,11 +177,12 @@
 </script>
 <style>
     .register {
-        color: #999999;
-    }
+         color: #999999;
+     }
 
     .register:hover {
         color: #00B7FF;
+        /*文字下划线*/
         text-decoration: underline;
     }
 </style>

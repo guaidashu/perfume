@@ -77,5 +77,4 @@ router.post("/addNewAddress", function (req, res, next) {
 router.post("/getUserInfo", function (req, res, next) {
     UserController.getUserInfo(req, res)
 })
-
 module.exports = router;

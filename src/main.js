@@ -15,6 +15,7 @@ Vue.config.productionTip = false
 Vue.filter("currency", currency)
 
 Vue.use(VueResource)
+//懒加载
 Vue.use(VueLazy, {
     loading: "/static/loading-svg/loading-bars.svg"
 })

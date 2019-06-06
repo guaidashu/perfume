@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+//请求接口
 export const cartList = () => {
     return axios.request({url: '/users/cartList', method: 'post'})
 }

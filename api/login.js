@@ -7,7 +7,7 @@ export const login = (post) => {
 export const logout = () => {
     return axios({url: '/users/logout', method: 'post'})
 }
-
+//请求接口
 export const checkLogin = () => {
     return axios({url: '/users/checkLogin', method: 'post'})
 }

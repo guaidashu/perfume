@@ -46,6 +46,7 @@ let common = {
             res.json(result)
         })
     },
+    // 获取当前要访问的url 例如访问 http://xxx.com/login 则获取到的是 /login 并且返回
     getRootPath() {
         //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
         let curWwwPath = window.document.location.href;

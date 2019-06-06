@@ -208,6 +208,7 @@ let UserController = {
             })
         })
     },
+    // 获取用户信息
     getUserInfo(req, res) {
         let condition = {userId: req.cookies.userId}
         User.findOne(condition, function (err, doc) {

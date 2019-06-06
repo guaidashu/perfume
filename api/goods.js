@@ -1,11 +1,11 @@
 import axios from 'axios'
-
+//请求接口
 export const getGoodsList = (params) => {
     return axios.request({url: "/goods/list", method: 'get', params: params})
 }
 
-export const addCart = (post) => {
-    return axios.request({url: '/goods/addCart', method: 'post', data: post})
+export const addCart = (post12121) => {
+    return axios.request({url: '/goods/addCart', method: 'post', data: post12121})
 }
 
 export const getTypeData = () => {
