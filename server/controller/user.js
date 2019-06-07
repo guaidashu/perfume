@@ -15,10 +15,13 @@ let UserController = {
             })
         })
     },
+    //删除商品
     delCart(req, res) {
         let userId = req.cookies.userId
         let productId = req.body.productId
         // $pull 删除指定的数据
+        // 首先根据用户id查询到 用户， 因为购物车信息是在 用户的 数据里，所以需要先找到用户，然后再在用户的购物车列表字段
+        // 根据传过来的商品id进行删除操作
         User.update({userId: userId}, {$pull: {'cartList': {'productId': productId}}}, function (err, doc) {
             common.back(res, err, function (res, result) {
                 result.result = 'suc'
@@ -26,6 +29,7 @@ let UserController = {
             })
         })
     },
+
     cartEdit(req, res) {
         let userId = req.cookies.userId
         let productId = req.body.productId

@@ -1,5 +1,5 @@
 const digitsRE = /(\d{3})(?=\d)/g
-
+//价格前面加上符号
 export function currency(value, currency, decimals) {
     value = parseFloat(value)
     if (!isFinite(value) || (!value && value !== 0)) return ''

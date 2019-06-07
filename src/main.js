@@ -20,6 +20,7 @@ Vue.use(VueLazy, {
     loading: "/static/loading-svg/loading-bars.svg"
 })
 Vue.use(infiniteScroll)
+//iview引入
 Vue.use(iView)
 
 /* eslint-disable no-new */

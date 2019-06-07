@@ -15,10 +15,14 @@
             }
         },
         methods:{
+          //  增加
           increment(){
+            //  子传父的方法
             this.$emit("incre");
           },
+          //  减少
           decrement(){
+              //  子传父的方法
             this.$emit("decre");
           }
         }

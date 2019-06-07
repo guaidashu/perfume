@@ -72,6 +72,7 @@
                     <div class="addr-list-wrap">
                         <div class="addr-list">
                             <ul>
+<!--                                v-bind 绑定class样式，显示选择效果-->
                                 <li v-for="(item, index) in addressListFilter" :key="index"
                                     :class="{'check': checkIndex === index}"
                                     @click="checkIndex = index; selectedAddressId = index">
@@ -81,7 +82,9 @@
                                         <dd class="tel">{{item.tel}}</dd>
                                     </dl>
                                     <div class="addr-opration addr-del">
+<!--                                        删除地址-->
                                         <a href="javascript:;" class="addr-del-btn" @click="showModal(item)">
+<!--                                            svg垃圾桶-->
                                             <svg class="icon icon-del">
                                                 <use xlink:href="#icon-del"></use>
                                             </svg>
@@ -93,9 +96,11 @@
                                     </div>
                                     <div class="addr-opration addr-default" v-if="item.isDefault">默认地址</div>
                                 </li>
+<!--                                点击显示模态框-->
                                 <li class="addr-new" @click="showAddModal">
                                     <div class="add-new-inner">
                                         <i class="icon-add">
+<!--                                            添加地址：+ -->
                                             <svg class="icon icon-add">
                                                 <use xlink:href="#icon-add"></use>
                                             </svg>
@@ -107,6 +112,7 @@
                         </div>
 
                         <div class="shipping-addr-more">
+<!--                            v-bind 绑定 class-->
                             <a class="addr-more-btn up-down-btn" href="javascript:;" @click="expand"
                                :class="{'open': limit>3}">
                                 更多
@@ -243,6 +249,7 @@
                     postCode: '',
                     tel: ''
                 },
+                //iview的表单验证机制
                 formRule: {
                     userName: [
                         {validator: validateUserName, trigger: 'blur', required: true}
@@ -290,6 +297,15 @@
             closeModal() {
                 this.isMdShow = false
             },
+            clearForm(){
+                this.form = {
+                    userName: '',
+                    streetName: '',
+                    postCode: '',
+                    tel: ''
+                }
+            },
+            //设为默认地址
             setDefaultAddress(addressId) {
                 setDefaultAddress({addressId: addressId}).then(res => {
                     if (res.data.status === 0) {
@@ -298,6 +314,7 @@
                     }
                 })
             },
+            //删除地址
             delAddress() {
                 delAddress({addressId: this.addressId}).then(res => {
                     if (res.data.status === 0) {
@@ -313,7 +330,9 @@
             closeAddModal() {
                 this.addModal = false
             },
+            //添加新地址
             addNewAddress() {
+                //判断是否有没有输入的字段
                 for (let i in this.form) {
                     if (this.form[i] === '') {
                         this.$Message.error("请输入正确的信息")
@@ -325,6 +344,8 @@
                     if (data.status === 0) {
                         this.$Message.success("添加成功")
                         this.init()
+                        //清空表单
+                        this.clearForm()
                         this.closeAddModal()
                     }
                 })

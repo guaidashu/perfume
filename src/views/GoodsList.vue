@@ -11,19 +11,24 @@
                     <span class="sortby">排列顺序：</span>
 <!--                    <a href="javascript:void(0)" class="default cur">默认</a>-->
                     <a href="javascript:void(0)" class="price" @click="sortPrice">价格
+<!--                        v-bind的简写是 一个: -->
+<!--                        v-bind sort==1为true,绑定了一个sort-up的样式,这个样式让箭头变为向上,否则就是向下-->
                         <svg class="icon icon-arrow-short" :class="{'sort-up': sort===1}">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-short"></use>
                         </svg>
                     </a>
-                    <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
+<!--                    在宽度达到手机分辨率时,触发并且显示分类选项-->
+                    <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">筛选依据</a>
                 </div>
                 <div class="accessory-result">
-                    <!-- filter -->
+<!--                筛选依据显示-->
                     <div class="filter stopPop" id="filter" :class="{'filterby-show': filterBy}">
                         <dl class="filter-price">
                             <dt>选择分类:</dt>
+<!--                            点击之后触发setTyleFilter-->
                             <dd><a href="javascript:void(0)" @click="setTypeFilter('all')"
                                    :class="{'cur': typeChecked=='all'}">All</a></dd>
+<!--                            渲染后端获取到的分类-->
                             <dd v-for="(item, index) in types" :key="index">
                                 <a href="javascript:void(0)" @click="setTypeFilter(item._id)"
                                    :class="{'cur': typeChecked==item._id}">{{item.name}}</a>
@@ -34,37 +39,33 @@
                             <dt>价格:</dt>
                             <dd>
                                 <Poptip trigger="focus">
-                                    <Input v-model="priceGt" placeholder="请输入起始价格" style="width: 120px"/>
+                                    <Input v-model="priceGt" clearable="true" placeholder="请输入起始价格" style="width: 120px"/>
                                     <div slot="content">{{ formatNumber }}</div>
                                 </Poptip>
                             </dd>
                             <dd>
                                 <Poptip trigger="focus">
-                                    <Input v-model="priceLte" placeholder="请输入最高价格" style="width: 120px"/>
+<!--                                    clearable清空-->
+                                    <Input v-model="priceLte" clearable="true" placeholder="请输入最高价格" style="width: 120px"/>
                                     <div slot="content">{{ formatNumber_2 }}</div>
                                 </Poptip>
                             </dd>
                             <dd>
                                 <Button type="primary" size="large" @click="init">搜索</Button>
                             </dd>
-                            <!--                            <dd><a href="javascript:void(0)" @click="setPriceFilter('all')"-->
-                            <!--                                   :class="{'cur': priceChecked=='all'}">All</a></dd>-->
-                            <!--                            <dd v-for="(item, index) in priceFilter" :key="index">-->
-                            <!--                                <a href="javascript:void(0)" @click="setPriceFilter(index)"-->
-                            <!--                                   :class="{'cur': priceChecked==index}">{{item.startPrice}}-->
-                            <!--                                    - {{item.endPrice}}</a>-->
-                            <!--                            </dd>-->
+
                         </dl>
                     </div>
 
-                    <!-- search result accessories list -->
+                    <!-- 商品列表 -->
                     <div class="accessory-list-wrap">
                         <div class="accessory-list col-4">
                             <ul>
+<!--                                v-for 渲染出商品列表-->
                                 <li v-for="(item, index) in goodsList" :key="index">
                                     <div class="pic" @click="goDetail(item._id)">
                                         <a href="javascript:;">
-                                            <!--<img v-lazy="getImagePath(item.productImage)" alt="">-->
+<!--                                           懒加载-->
                                             <img :src="getImagePath(item.productImage)"
                                                  v-lazy="getImagePath(item.productImage)" alt="">
                                         </a>
@@ -80,7 +81,7 @@
                                     </div>
                                 </li>
                             </ul>
-
+<!--                         最下面的原点:滚动检测的插件-->
                             <div v-infinite-scroll="loadMore" class="load-more" infinite-scroll-disabled="busy"
                                  infinite-scroll-distance="30" style="text-align: center;">
                                 <!--<span v-text="loadingText"></span>-->
@@ -175,16 +176,20 @@
                 this.closePop()
             },
             getGoodsList(flag) {
+
                 let tmp
+                //搜索框:获取用户输入的商品名
                 tmp = this.$route.query.title
                 if (tmp) {
                     this.searchTitle = tmp
                 }
+                // 获取url里get方式传过来的类型(category)的值
                 tmp = this.$route.query.category
                 if (tmp) {
                     this.typeChecked = tmp
                 }
                 getGoodsList({
+                    //赋值
                     page: this.page,
                     pageSize: this.pageSize,
                     sort: this.sort,
@@ -218,14 +223,18 @@
                 this.overLayFlag = false
             },
             setTypeFilter(index) {
+                //获取传过来的类型,如果是主页传过来的就有类型,其他的就没有
                 let tmp = this.$route.query.category
+                //如果有类型就跳转到search页面
                 if (tmp) {
                     this.$router.push({
                         path: '/search'
                     })
                 }
+                //传进来的index类型赋给this.typeChecked
                 this.typeChecked = index
                 this.page = 1
+                //如是手机屏幕,需要关闭筛选框
                 this.closePop()
             },
             sortPrice() {
@@ -233,6 +242,7 @@
                 this.page = 1
                 this.sort === -1 ? this.sort = 1 : this.sort = -1
             },
+            //构造图片的实际路径(因为上传的时候只保存了图片名)
             getImagePath(src) {
                 return "/static/upload/" + src
             },
@@ -251,9 +261,10 @@
                     productId: productId
                 }).then(res => {
                     if (res.data.status === 0) {
-                        // this.$Message.success('添加成功')
+                        //加购成功
                         this.mdShowCart = true
                     } else {
+                        //没有成功
                         this.mdShow = true
                     }
                 })
@@ -270,6 +281,7 @@
                     }
                 })
             },
+            //跳转到详情页
             goDetail(_id) {
                 this.$router.push({
                     path: '/detail',
@@ -282,12 +294,12 @@
         computed: {
             formatNumber() {
                 if (this.priceGt === 0) return '请输入最低价格';
-
+                //判断是不是数字
                 function parseNumber(str) {
                     const re = /(?=(?!)(d{3})+$)/g;
                     return str.replace(re, ',');
                 }
-
+                //返回数字
                 return parseNumber(this.priceGt);
             },
             formatNumber_2() {
@@ -301,6 +313,7 @@
                 return parseNumber(this.priceLte);
             }
         },
+        // watch 监控变量,如果变量值发生了改变,就调用相应的函数
         watch: {
             'sort': 'init',
             'typeChecked': 'init',

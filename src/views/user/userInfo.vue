@@ -10,25 +10,21 @@
             <FormItem label="出生日期">
                 <Row>
                     <Col span="11">
+<!--                        DatePicker：iview 的 一个组件-->
                         <DatePicker type="date" :disabled="changeInfo" placeholder="选择日期"
                                     v-model="formItem.birthday"></DatePicker>
                     </Col>
                 </Row>
             </FormItem>
+
             <FormItem label="性别">
+<!--                RadioGroup：iview的一个组件-->
                 <RadioGroup v-model="formItem.sex" :disabled="changeInfo">
                     <Radio label="男">男</Radio>
                     <Radio label="女">女</Radio>
                 </RadioGroup>
             </FormItem>
-            <!--            <FormItem label="选择爱好">-->
-            <!--                <CheckboxGroup v-model="formItem.checkbox">-->
-            <!--                    <Checkbox label="Eat"></Checkbox>-->
-            <!--                    <Checkbox label="Sleep"></Checkbox>-->
-            <!--                    <Checkbox label="Run"></Checkbox>-->
-            <!--                    <Checkbox label="Movie"></Checkbox>-->
-            <!--                </CheckboxGroup>-->
-            <!--            </FormItem>-->
+
             <FormItem label="个人签名">
                 <Input :disabled="changeInfo" v-model="formItem.personal_sign" type="textarea"
                        :autosize="{minRows: 2,maxRows: 5}"

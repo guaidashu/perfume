@@ -64,10 +64,11 @@
                             </ul>
                         </div>
                         <ul class="cart-item-list">
+<!--                            v-if绑定商品是否被选择，如果被选中就显示-->
                             <li v-for="(item, index) in cartList" :key="index" v-if="parseInt(item.checked) === 1">
                                 <div class="cart-tab-1">
                                     <div class="cart-item-pic">
-                                        <img :src="'/static/' + item.productImage" :alt="item.productName">
+                                        <img :src="'/static/upload/' + item.productImage" :alt="item.productName">
                                     </div>
                                     <div class="cart-item-title">
                                         <div class="item-name">{{item.productName}}</div>
@@ -76,7 +77,7 @@
                                 </div>
                                 <div class="cart-tab-2">
                                     <div class="item-price">{{item.salePrice | currency('￥')}}</div>
-                                </div>
+                </div>
                                 <div class="cart-tab-3">
                                     <div class="item-quantity">
                                         <div class="select-self">
@@ -190,6 +191,7 @@
                 })
                 return price
             },
+            //生成订单，并跳转
             payMent() {
                 let addressId = this.$route.query.addressId
                 payMent({

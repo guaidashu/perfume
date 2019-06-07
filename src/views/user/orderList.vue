@@ -2,7 +2,7 @@
     <div>
         <Table :data="userInfo.orderList" :columns="orderListColumns">
             <template slot-scope="{row, index}" slot="orderTotal">
-                <span style="color: red;">{{row.orderTotal | currency('￥')}}</span>
+                <span style="color:#ed4014;">{{row.orderTotal | currency('￥')}}</span>
             </template>
             <template slot-scope="{row, index}" slot="action">
                 <Button type="error" size="small" @click="moneyBack(row)">退款</Button>
@@ -53,6 +53,7 @@
                     }
                 })
             },
+            //跳转到退款页面
             moneyBack(row) {
                 this.$router.push({
                     path: '/moneyBack',

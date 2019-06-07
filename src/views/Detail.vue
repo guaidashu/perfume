@@ -9,16 +9,9 @@
             <Row :gutter="16" style="position: relative;">
                 <Col span="12" style="position: relative;">
                     <div class="img_container" id="img_container">
+<!--                        pic-zoom图片放大镜插件-->
                         <pic-zoom :url="getImagePath(goodsInfo.productImage)" :scroll="true" :scale="2"></pic-zoom>
                     </div>
-                    <!--                        <div style="width: 100%;">-->
-                    <!--                            <Row :gutter="16">-->
-                    <!--                                <Col span="6">-->
-                    <!--                                    <img width="100%" :src="getImagePath(goodsInfo.productImage)" alt="">-->
-                    <!--                                </Col>-->
-                    <!--                            </Row>-->
-                    <!--                        </div>-->
-
                 </Col>
                 <Col span="12" style="position: relative;">
                     <div class="content_container">
@@ -91,18 +84,22 @@
         },
         methods: {
             init() {
+                //调用获取商品信息的函数
                 this.getGoodsInfo()
             },
             getGoodsInfo() {
                 getGoodsInfo({_id: this.$route.query._id}).then(res => {
+                    //获取接口返回的数据
                     let data = res.data
                     if (data.status === 0) {
+                        //赋值给goodsinfo
                         this.goodsInfo = data.result.list[0]
                     } else {
                         console.log(data.msg)
                     }
                 })
             },
+            //构造图片的完整路径
             getImagePath(src) {
                 return '/static/upload/' + src
             }

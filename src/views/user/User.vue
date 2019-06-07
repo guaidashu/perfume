@@ -1,5 +1,6 @@
 <template>
     <div class="layout">
+<!--        Layout: iview的布局组件，实现左右布局-->
         <Layout>
             <nav-header></nav-header>
             <nav-bread>
@@ -9,11 +10,13 @@
             <Layout :style="{padding: '0 50px'}">
                 <Content :style="{padding: '24px 0', minHeight: '280px', background: '#fff'}">
                     <Layout>
+<!--                        Sider：iview的组件-->
                         <Sider hide-trigger :style="{background: '#fff'}">
                             <Menu active-name="1" theme="light" width="auto" :open-names="['1']">
                                 <MenuGroup title="用户信息">
                                     <router-link :to="{name: 'userInfo'}">
                                         <MenuItem name="1">
+<!--                                            图标-->
                                             <Icon type="md-document"/>
                                             查看信息
                                         </MenuItem>
@@ -28,12 +31,14 @@
                                 <MenuGroup title="购物信息">
                                     <router-link to="/user/orderList">
                                         <MenuItem name="3">
+<!--                                            图标-->
                                             <Icon type="md-heart"/>
                                             订单列表
                                         </MenuItem>
                                     </router-link>
                                     <router-link to="/cart">
                                         <MenuItem name="4">
+<!--                                            图标-->
                                             <Icon type="md-leaf"/>
                                             购物车
                                         </MenuItem>
@@ -42,6 +47,7 @@
                             </Menu>
                         </Sider>
                         <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+<!--                            容器-->
                             <router-view></router-view>
                         </Content>
                     </Layout>
@@ -74,11 +80,11 @@
 
 <style scoped>
     .layout {
-        border: 1px solid #d7dde4;
-        background: #f5f7f9;
-        position: relative;
-        border-radius: 4px;
-        overflow: hidden;
+           border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
     }
 
     .layout-logo {

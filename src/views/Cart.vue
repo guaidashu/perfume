@@ -63,16 +63,18 @@
                                 <li v-for="(item, index) in cartList" :key="index">
                                     <div class="cart-tab-1">
                                         <div class="cart-item-check">
+<!--                                            选中商品， 如果已经选中，则会切换成未选中，如果未选中就会切换成选中-->
                                             <a href="javascript:;" class="checkbox-btn item-check-btn"
                                                :class="{'check': parseInt(item.checked) === 1}"
                                                @click="editCart(3, item)">
+<!--                                                对勾-->
                                                 <svg class="icon icon-ok">
                                                     <use xlink:href="#icon-ok"></use>
                                                 </svg>
                                             </a>
                                         </div>
                                         <div class="cart-item-pic">
-                                            <img :src="'/static/' + item.productImage">
+                                            <img :src="'/static/upload/' + item.productImage">
                                         </div>
                                         <div class="cart-item-title">
                                             <div class="item-name">{{item.productName}}</div>
@@ -85,6 +87,7 @@
                                         <div class="item-quantity">
                                             <div class="select-self select-self-open">
                                                 <div class="select-self-area">
+<!--                                                    加减-->
                                                     <a class="input-sub" @click="editCart(1, item)">-</a>
                                                     <span class="select-ipt">{{item.productNum}}</span>
                                                     <a class="input-add" @click="editCart(2, item)">+</a>
@@ -98,6 +101,7 @@
                                     </div>
                                     <div class="cart-tab-5">
                                         <div class="cart-item-opration">
+<!--                                            删除商品-->
                                             <a href="javascript:;" class="item-edit-btn"
                                                @click="delCartConfirm(item.productId)">
                                                 <svg class="icon icon-del">
@@ -115,6 +119,7 @@
                             <div class="cart-foot-l">
                                 <div class="item-all-check">
                                     <a href="javascript:;">
+<!--                                        选择全部-->
                                         <span class="checkbox-btn item-check-btn" :class="{'check': checkAllFlag}"
                                               @click="toggleCheckAll">
                                             <svg class="icon icon-ok">
@@ -181,21 +186,26 @@
             init() {
                 this.getCartList()
             },
+            //获取购物车列表
             getCartList() {
                 cartList().then(res => {
                     let data = res.data
                     this.cartList = data.result
                 })
             },
+            //获取单个商品价格
             getLittleTotalPrice(item) {
                 return parseInt(item.salePrice) * parseInt(item.productNum)
             },
+            //获取总价
             getTotalPrice() {
                 let price = 0
                 let goodsNum = 0
                 let self = this
                 let selectAll = true
+                // 遍历所有商品
                 this.cartList.forEach(function (item) {
+                    // 被标为选中了的商品才进行总价的计算
                     if (item.checked === '1') {
                         price += self.getLittleTotalPrice(item)
                         goodsNum++
@@ -203,6 +213,7 @@
                         selectAll = false
                     }
                 })
+                //如果全选都为true
                 if (selectAll) {
                     this.checkAllFlag = true
                 } else {
@@ -211,10 +222,12 @@
                 this.goodsNum = goodsNum
                 return price
             },
+            //让模态窗显示处理
             delCartConfirm(productId) {
                 this.modalConfirm = true
                 this.productId = productId
             },
+            //删除购物车内商品
             delCart() {
                 delCart({productId: this.productId}).then(res => {
                     if (res.data.status === 0) {
@@ -223,42 +236,54 @@
                     }
                 })
             },
+            //是否被选中
             editCart(flag, item) {
+                //减少数量
                 if (flag === 1) {
                     if (item.productNum <= 1) {
                         return
                     }
                     item.productNum--;
+                //增加数量
                 } else if (flag === 2) {
                     item.productNum++;
                 } else {
                     // 选中事件
                     item.checked = item.checked === '1' ? '0' : '1'
                 }
+                //调用接口进行数据处理
                 cartEdit({
+                    //赋值传给后端接口
                     productId: item.productId,
                     productNum: item.productNum,
                     checked: item.checked
                 }).then(res => {
                 })
             },
+            //选择全部
             toggleCheckAll() {
+                // 判断是否全选的按钮 进行 取相反值，因为就是两种状态，全选，和未全选
                 this.checkAllFlag = !this.checkAllFlag
+                //定义一个临时变量，代表是否选中
                 let checked = ''
+                // 根据是否选中判断变量的值 进行checked临时变量值的设置
                 if (this.checkAllFlag) {
                     checked = '1'
                 } else {
                     checked = '0'
                 }
+                // 将所有商品的选中状态设为临时变量判断得来的值
                 this.cartList.forEach(function (item) {
                     item.checked = checked
                 })
+                // 调用选择处理接口， 让接口把商品的选中状态改为 修改后的状态
                 editCheckAll({checkAll: checked}).then(res => {
                     if (res.data.status === 0) {
                         console.log("全选")
                     }
                 })
             },
+            //跳转到地址页面
             checkOut() {
                 if (this.goodsNum > 0){
                     this.$router.push({
@@ -266,6 +291,7 @@
                     })
                 }
             },
+            //关闭模态框
             closeModal() {
                 this.modalConfirm = false
             }
@@ -273,6 +299,7 @@
         watch: {
             'cartList': 'getTotalPrice'
         },
+        //页面加载时就会执行mounted里面的内容
         mounted() {
             this.init()
         }

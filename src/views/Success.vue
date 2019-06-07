@@ -73,6 +73,7 @@
             init() {
                 this.getOrderInfo()
             },
+            //获取订单信息
             getOrderInfo() {
                 getOrderInfo({orderId: this.$route.query.orderId}).then(res=>{
                     let data = res.data

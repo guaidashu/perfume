@@ -34,7 +34,7 @@
                 <div class="order-create-main">
                     <h3>打开手机支付宝<br>扫一扫进行付款</h3>
                     <p>
-                        <span>订单总计：5230</span>
+                        <span>订单总计：<span  style="color:rgb(209, 67, 74)">{{orderInfo.orderTotal | currency('￥')}}</span></span>
                         <br>
                         <Button type="primary" size="large" @click="success"
                                 style="background-color: #d1434a; border-color: #d1434a; color: #fff; margin-top: 15px;">
@@ -68,6 +68,7 @@
     import NavFooter from "../components/NavFooter";
     import NavBread from "../components/NavBread";
     import Modal from "../components/Modal";
+    import {getOrderInfo} from "../../api/goods";
 
     export default {
         name: "Pay",
@@ -77,7 +78,25 @@
             NavFooter,
             NavHeader
         },
+        data() {
+            return {
+                orderInfo: {}
+            }
+        },
         methods: {
+            init() {
+                this.getOrderInfo()
+            },
+            //获取列表信息显示价格
+            getOrderInfo() {
+                getOrderInfo({orderId: this.$route.query.orderId}).then(res=>{
+                    let data = res.data
+                    if (data.status === 0){
+                        this.orderInfo = data.result
+                    }
+                })
+            },
+            //跳转到付款成功页面
             success() {
                 this.$router.push({
                     path: '/orderSuccess',
@@ -86,6 +105,9 @@
                     }
                 })
             }
+        },
+        mounted() {
+            this.init()
         }
     }
 </script>

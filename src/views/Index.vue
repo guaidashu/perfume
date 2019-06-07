@@ -4,9 +4,12 @@
         <nav-bread>
             <span slot="bread">主页</span>
         </nav-bread>
+<!--        轮播器-->
         <carouse></carouse>
         <div style="width: 100%; height: 30px;"></div>
         <div style="padding: 0px 30px;">
+<!--            iview组件，row 将父组件分为24等分-->
+<!--            gutter：每2个col组件之间的间距-->
             <Row :gutter="16">
                 <Col span="6">
                     <div class="category_container" @click="search('5ce21e6061c56f52dc40baca')">
@@ -63,6 +66,7 @@
         components: {Carouse, NavFooter, NavBread, NavHeader},
         name: "Index",
         methods: {
+            //跳转到查找页面
             search(query){
                 this.$router.push({
                     path: '/search',

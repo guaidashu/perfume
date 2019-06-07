@@ -46,6 +46,7 @@
                     <div class="navbar-cart-container">
                         <span class="navbar-cart-count"></span>
                         <router-link class="navbar-link navbar-cart-link" to="/cart">
+<!--                            购物车图标 svg-->
                             <svg class="navbar-cart-logo">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
                             </svg>
@@ -69,6 +70,7 @@
                         <ul>
                             <li class="regi_form_input">
                                 <i class="icon IconPeople"></i>
+<!--                                v-model 双向绑定-->
                                 <input type="text" tabindex="1" name="loginname" v-model="userName"
                                        class="regi_login_input regi_login_input_left" placeholder="用户名"
                                        data-type="loginname">
@@ -86,6 +88,7 @@
                         <a href="javascript:;" class="btn-login" @click="login">登 录</a>
                     </div>
                     <div style="text-align: center; color: #999;height: 50px; width:100%; line-height: 50px;font-size: 13px; ">
+<!--                        跳转到注册界面-->
                         <router-link to="/register" class="register">注册账号</router-link>
                     </div>
                 </div>
@@ -120,6 +123,7 @@
                     return
                 }
                 login({userName: this.userName, userPwd: this.userPwd}).then(res => {
+                    // 如果status返回0，登录成功
                     if (res.data.status === 0) {
                         this.errorTip = false
                         console.log("login successful")
@@ -161,6 +165,7 @@
                         let path = common.getRootPath()
                         // 将获取到的url传给 checkUrl 进行判断,是否需要进行拦截, 返回一个布尔值(boolean) true表示不需要拦截, false需要拦截并跳转
                         if (!check.checkUrl(path)) {
+                            //跳转到login页面
                             this.$router.push({
                                 path: "/login"
                             })
